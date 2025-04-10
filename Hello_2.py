@@ -1,3 +1,4 @@
+# Works
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -33,7 +34,7 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setUnderline(True)
         self.myLabel.setFont(font)
-        self.myLabel.setAlignment(QtCore.Qt.Qt::AlignmentFlag::AlignCenter)
+        self.myLabel.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.myLabel.setObjectName("myLabel")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -52,3 +53,11 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.MyPushButton.setText(_translate("MainWindow", "Click Me"))
         self.myLabel.setText(_translate("MainWindow", "Hello everyone!"))
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())

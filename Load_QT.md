@@ -3,9 +3,28 @@ my aliases  designer and pyuic5
 
 to run the pyuic5 use' pyuic5 HelloWorld.ui -o HelloWorld.py" to position the output in a .py file
 
-
+HelloWorld_1.py works with the basic qt_enum_cleaner.py plus added the if __name...
 
 https://chatgpt.com/share/67f5d89a-8e50-800f-8c35-52295997425e link to chat instructions on set up of QT and Pyuic design and pyuic5 aliases on both zsh and bash(also in MAC notes)
+
+common enum  carryovers from c++
+❌ Incorrect	            ✅ Correct
+Qt::AlignCenter     	QtCore.Qt.AlignCenter
+Qt::Horizontal	        QtCore.Qt.Horizontal
+Qt::Key_Escape	        QtCore.Qt.Key_Escape
+QAbstractItemView::NoEditTriggers	QtWidgets.QAbstractItemView.NoEditTriggers
+
+self.myLabel.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter) correct
+
+self.myLabel.setAlignment(QtCore.Qt.Qt::AlignmentFlag::AlignCenter) wrong
+
+
+command line help commands:   run-help=man
+                            which-command=whence
+
+
+
+
 
 1. Install Qt (Includes Designer) Using Homebrew
 If you don’t already have Homebrew:
