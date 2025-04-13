@@ -14,16 +14,33 @@ Qt::Horizontal	        QtCore.Qt.Horizontal
 Qt::Key_Escape	        QtCore.Qt.Key_Escape
 QAbstractItemView::NoEditTriggers	QtWidgets.QAbstractItemView.NoEditTriggers
 
-self.myLabel.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter) correct
 
-self.myLabel.setAlignment(QtCore.Qt.Qt::AlignmentFlag::AlignCenter) wrong
-
+Example of correction formats to look for:
+self.myLabel.setAlignment(QtCore.Qt.Qt::AlignmentFlag::AlignCenter) is wrong
+self.myLabel.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter) is correct
 
 command line help commands:   run-help=man
                             which-command=whence
 
+This was the original error code area in calc.py.    self.OutputLabel.setFont(font)
+        self.OutputLabel.setFrameShape(QtCore.QFrame.Shape.Box) ##error
+        self.OutputLabel.setFrameShadow(QtCore.QFrame.Shadow.Raised)## error
+        # self.OutputLabel.setFrameShape(QtCore.QFrame.Shape.Box)
+        self.OutputLabel.setFrameShape(QtCore.Qt.QFrame::Shape::Box)
+        self.OutputLabel.setFrameShadow(QtCore.Qt.QFrame::Shadow::Raised)## error
+        self.OutputLabel.setLineWidth(4)
+        self.OutputLabel.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)## error
+        self.OutputLabel.setObjectName("OutputLabel")
 
-
+these are the corrections:
+n the calc.py file I needed these corrections to make the program work 
+## from You are chatting with GPT-4o. AI   on duck duck go
+self.OutputLabel.setFrameShape(QtWidgets.QFrame.Box)  # Corrected line
+        self.OutputLabel.setFrameShadow(QtWidgets.QFrame.Raised)  # Corrected line
+        self.OutputLabel.setLineWidth(4)
+        self.OutputLabel.setAlignment(QtCore.Qt.AlignCenter)  # Corrected line
+        self.OutputLabel.setObjectName("OutputLabel")
+Also needed:  from PyQt5.QtWidgets import QFrame  # Import QFrame from QtWidgetsrecommended
 
 
 1. Install Qt (Includes Designer) Using Homebrew
