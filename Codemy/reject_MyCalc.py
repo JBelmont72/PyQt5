@@ -44,7 +44,7 @@ File "/Users/judsonbelmont/Documents/SharedFolders/Pico/PyQt5/Codemy/MyCalc_1.py
         # self.OutputLabel.setObjectName("OutputLabel")    
     
 '''
-
+## this became faulty when I added 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFrame  # I added- Import QFrame from QtWidgets recommended
 
@@ -103,7 +103,7 @@ class Ui_MyCalculator(object):
         font.setBold(True)
         self.cButton.setFont(font)
         self.cButton.setObjectName("cButton")
-        self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget,clicked = lambda:self.press_it('4'))
+        self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget,clicked = lambda:self.remove_it())
         self.pushButton_4.setGeometry(QtCore.QRect(310, 90, 81, 101))
         font = QtGui.QFont()
         font.setFamily("Arial Rounded MT Bold")
@@ -209,7 +209,7 @@ class Ui_MyCalculator(object):
         font.setBold(False)
         self.oneButton.setFont(font)
         self.oneButton.setObjectName("oneButton")
-        self.PlusMinusButton = QtWidgets.QPushButton(self.centralwidget,clicked =lambda:self.press_it('+/-'))
+        self.PlusMinusButton = QtWidgets.QPushButton(self.centralwidget,clicked =lambda:self.press_plus_minus())
         self.PlusMinusButton.setGeometry(QtCore.QRect(130, 490, 81, 101))
         font = QtGui.QFont()
         font.setFamily("Arial Rounded MT Bold")
@@ -225,7 +225,7 @@ class Ui_MyCalculator(object):
         font.setBold(True)
         self.sineButton.setFont(font)
         self.sineButton.setObjectName("sineButton")
-        self.pointButton = QtWidgets.QPushButton(self.centralwidget,clicked =lambda:self.press_it('.'))
+        self.pointButton = QtWidgets.QPushButton(self.centralwidget,clicked =lambda:self.add_decimal())
         self.pointButton.setGeometry(QtCore.QRect(310, 490, 81, 101))
         font = QtGui.QFont()
         font.setFamily("Arial Rounded MT Bold")
@@ -322,15 +322,149 @@ class Ui_MyCalculator(object):
         self.divideButton.setText(_translate("MyCalculator", "/"))
         self.equalButton.setText(_translate("MyCalculator", "="))
         self.minusButton.setText(_translate("MyCalculator", "-"))
+    
+    def remove_it(self):
+        #remove character
+        #grab what is on the screen
+        #remove last character
+        screen= self.ResutlLabel.text()
+        screen=screen[:-1]
+        self.ResutlLabel.setText(screen)        
+    
+    # add a decimal
+    # def add_decimal(self):
+    #     screen= self.ResutlLabel.text()
+    #     if '.' in self.ResutlLabel.text():## if the label already has a decimal
+    #         pass
+    #     else:   
+    #         self.ResutlLabel.setText(f'{self.ResutlLabel.text()}.')## add a decimal to the label
+    ## will creeate a list of pressed buttons
+    # def add_decimal(self):
+    #     screen= self.ResutlLabel.text()
+    #     if screen[-1] == '.':
+    #         pass
+    #     else:
+    #         # screen=screen+'.'
+    #         # self.ResutlLabel.setText(screen + '.') ## add a decimal to the label
+    #         self.ResutlLabel.setText(f'{screen}.')## will create a list of pressed buttons
+                    
+    # ## add a decimal
+    # def add_decimal(self):
+    #     screen= self.ResutlLabel.text()
+    #     if '.' in self.ResutlLabel.text():## if the label already has a decimal
+    #         pass
+    #     else:   
+    #         self.ResutlLabel.setText(f'{self.ResutlLabel.text()}.')## add a decimal to the label
+
+     # change from positive  to negative and # vice versa
+    # def press_plus_minus(self):
+    #     expression = self.ResutlLabel.text()
+    #     if not expression:
+    #         return
+
+    #     import re
+
+    #     # Find the last number using regex
+    #     match = re.search(r'([-+]?\d*\.?\d+)(?!.*\d)', expression)
+    #     if match:
+    #         start, end = match.span()
+    #         number = match.group()
+
+    #         # Toggle sign
+    #         if number.startswith('-'):
+    #             new_number = number[1:]  # Remove minus
+    #         else:
+    #             new_number = '-' + number  # Add minus
+
+    #         # Replace in expression
+    #         new_expression = expression[:start] + new_number + expression[end:]
+    #         self.ResutlLabel.setText(new_expression)
+## the above uses rege and does not work with decimal numbers
+# the current implementation is inserting signs without properly replacing the number. That's because the regex is finding the last number without considering the operators before it. So it's not actually replacing 34 — it's just adding - before 34, not toggling.
+# Let’s fix that so the sign toggle affects only the last number, and does not stack symbols like --+34.
+# ✅ Desired Behavior:
+
+# Input	After ± Press	After ± Again
+# 12+34	12+-34	12+34
+# -45	45	-45
+# 🧠 Fix: Smarter Regex and Replacement
+# We’ll:
+# Detect the last number including any negative sign.
+# Replace it with the opposite sign version.
+# corrected
+
+def press_plus_minus(self):
+    expression = self.ResutlLabel.text()
+## became faulty when I added the press_plus_minus function
+# def press_plus_minus(self):
+#     expression = self.ResutlLabel.text()
+#     if not expression:
+#         return
+
+#     import re
+
+#     # Match the last number (may be preceded by a '+' or '-' or nothing)
+#     match = re.search(r'([+\-]?)(\d+(\.\d+)?)(?!.*\d)', expression)
+#     if match:
+#         full_match = match.group(0)
+#         sign = match.group(1)
+#         number = match.group(2)
+
+#         # Toggle sign
+#         if sign == '-':
+#             new_number = number  # Remove minus
+#         else:
+#             new_number = '-' + number  # Add minus
+
+#         # Replace in expression
+#         start, end = match.span()
+#         new_expression = expression[:start] + new_number + expression[end:]
+#         self.ResutlLabel.setText(new_expression)
+
+         
+    ## add a decimal
+# def add_decimal(self):
+        # screen= self.ResutlLabel.text()
+        # screen=screen+'.'
+        # self.ResutlLabel.setText(screen)
+
+    def add_decimal(self):
+        current_text = self.ResutlLabel.text()
+        
+        if not current_text:    ## i can do wothout this line since i already set the label to 0
+            # If the label is empty, start with '0.'
+            # Start with '0.' if it's empty
+            self.ResutlLabel.setText("0.")
+            return
+
+        # Find the last operator (split point for the most recent number)
+        last_operator_pos = -1
+        for op in ['+', '-', '*', '/']:
+            pos = current_text.rfind(op)
+            if pos > last_operator_pos:
+                last_operator_pos = pos
+
+        # Get the last number being typed (after the last operator)
+        last_number = current_text[last_operator_pos + 1:]
+
+        # Only add a decimal if that last number doesn't already have one
+        if '.' not in last_number:
+            self.ResutlLabel.setText(current_text + '.')
+
+    
     def press_it(self,pressed):       ## WORKS
         # self.ResutlLabel.setText(pressed)
         if pressed == 'C':
             pressed='0'
             self.ResutlLabel.setText(pressed)
         else:
-            self.ResutlLabel.setText(pressed)
-            ##self.ResutlLabel.setText(f'{self.ResutlLabel.setText(pressed)}')
-        
+            ## Check if the last character  starts with a 0
+            if self.ResutlLabel.text() == '0':## if the entire label is 0
+                self.ResutlLabel.setText(pressed) ## set the label to the pressed button
+                # self.ResutlLabel.setText(' ')
+            else:
+                self.ResutlLabel.setText(f'{self.ResutlLabel.text()}{pressed}') ##   concatenate the pressed button to the label
+                     
         
     # def press_it(self,pressed):
     #     while True:
