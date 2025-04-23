@@ -1,1 +1,0 @@
- # self.oneButton = QtWidgets.QPushButton(self.centralwidget,clicked =lambda:self.press_it('1'))

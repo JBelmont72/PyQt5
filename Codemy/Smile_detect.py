@@ -1,4 +1,6 @@
-import cv2
+import cv2      ## detects faces but not smiles
+# Smile detection using OpenCV and PyQt5    
+
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout
 from PyQt5.QtCore import Qt
