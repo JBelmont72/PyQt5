@@ -173,3 +173,9 @@ Error: one input ui-file must be specified
 
 The default interactive shell is now zsh.
 To update your account to use zsh, please run `chsh -s /bin/zsh`.
+
+
+
+
+From the beginning to install pyuic and qr designer:
+
