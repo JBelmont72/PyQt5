@@ -50,11 +50,25 @@ from math import *
 
 #     function_creator()
 
-safe_list = ['acos',1, 'asin',2, 'atan', 3,'atan2',4, 'ceil', 'cos']
-safe_dict = {}
-for safe_key in safe_list:
-    safe_dict[safe_key] = locals().get(safe_key)
-print(safe_dict)
-print(safe_dict['acos'](0.5))  # Example usage of a safe method
-print(safe_dict['asin'](0.5))  # Example usage of another safe method
-print(safe_dict['atan'](1))    # Example usage of another safe method
+# safe_list = ['acos',1, 'asin',2, 'atan', 3,'atan2',4, 'ceil', 'cos']
+# safe_dict = {}
+# for safe_key in safe_list:
+#     safe_dict[safe_key] = locals().get(safe_key)
+# print(safe_dict)
+# print(safe_dict['acos'](0.5))  # Example usage of a safe method
+# print(safe_dict['asin'](0.5))  # Example usage of another safe method
+# print(safe_dict['atan'](1))    # Example usage of another safe method
+
+numbers = [1, 2, 3, 4, 5]
+squared_numbers = list(map(lambda x: x**2, numbers))
+print(squared_numbers)
+
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+even_numbers = list(filter(lambda x: x % 2 == 0, numbers))
+print(even_numbers)
+
+from functools import reduce
+
+numbers = [1, 2, 3, 4, 5]
+product = reduce(lambda x, y: x * y, numbers)
+print(product)
