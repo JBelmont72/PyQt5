@@ -21,6 +21,11 @@
 | `QIcon::Off`                     | `QtGui.QIcon.Off`                            | `QtGui`                         |
 
 `Qt::NoRole`                     | `QtWidgets.QAction.NoRole`                   | ✅ `QtWidgets` ⚠️ (extra needed) |
+* self.label.setFrameShape(QtWidgets.QFrame.Box)
+* self.label.setFrameShadow(QtWidgets.QFrame.Raised)
+# self.label.setFrameShape(QtCore.Qt.QFrame::Shape::Box)
+# self.label.setFrameShadow(QtCore.Qt.QFrame::Shadow::Raised)
+
 
 self.actionHome.setMenuRole(QtCore.Qt    .QAction::MenuRole             ::NoRole)              error
 self.actionHome.setMenuRole(             QtWidgets.QAction              .NoRole)               corrected

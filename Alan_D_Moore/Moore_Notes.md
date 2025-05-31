@@ -73,3 +73,10 @@ https://realpython.com/videos/pyqt-layouts-overview/
 
 
 he mentions pyside as an alternative to PyQt5 which is python 
+
+https://www.riverbankcomputing.com/static/Docs/PyQt5/signals_slots.html
+A bound signal has connect(), disconnect() and emit() methods that implement the associated functionality
+
+
+This is good guide to pySide6  https://www.pythonguis.com/pyside6-tutorial/
+this is from same source for PyQt5  https://www.pythonguis.com/pyqt5-tutorial/
