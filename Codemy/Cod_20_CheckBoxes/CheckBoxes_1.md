@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-## with radioboxes you can only have one working at a time.  the lambda functuion passes self, and a variable
-## the variable will do whatever depending which radiobutton was selected.
 '''
    def winter(self, state):
         sender = self.sender()  # Get the checkbox that triggered the state change
@@ -110,11 +106,9 @@ class Ui_MainWindow(object):
         ### states: 0=not checked,1= true but if triState then half check is 1 and full check is 2
         print(self.checkBox1.text())   #<PyQt5.QtWidgets.QCheckBox object at 0x100c9a5f0>
         print(self.checkBox1.isChecked())
-        print(self.checkBox1.checkState())# gives o, 1 ,or 2
+        print(self.checkBox1.checkState())
         ## can use this info for python if statements  if self.checkBox1 .isChecked() ==True:   etc
-        print(f'my Label name:  {self.label.objectName()}')
-        
-        if self.checkBox1.isChecked():## could have if self.checkBox1.checkState() == 0 0r 1 0r2:
+        if self.checkBox1.isChecked():
             self.red ='Red'
         else:
             self.red =''
@@ -172,3 +166,37 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+
+
+
+```py
+import sys
+
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QApplication, QCheckBox, QMainWindow
+
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super(MainWindow, self).__init__()
+
+        self.setWindowTitle("My App")
+
+        widget = QCheckBox()
+        widget.setCheckState(Qt.Checked)
+
+        widget.stateChanged.connect(self.show_state)
+
+        self.setCentralWidget(widget)
+
+    def show_state(self, s):
+        print(s == Qt.Checked)
+        print(s)
+
+
+app = QApplication(sys.argv)
+w = MainWindow()
+w.show()
+app.exec()
+
+```

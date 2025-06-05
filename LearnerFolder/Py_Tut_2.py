@@ -124,34 +124,88 @@ https://www.pythontutorial.net/pyqt/pyqt-qlineedit/
 #     window.show()
 #     sys.exit(app.exec_())
 ######~~~~~~  https://www.pythontutorial.net/pyqt/pyqt-qcheckbox/
+# import sys
+# from PyQt5.QtWidgets import QApplication, QWidget, QCheckBox,  QGridLayout
+# from PyQt5.QtCore import Qt
+
+
+# class MainWindow(QWidget):
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+
+#         self.setWindowTitle('PyQt QCheckBox')
+#         self.setGeometry(100, 100, 320, 210)
+
+#         # create a grid layout
+#         layout = QGridLayout()
+#         self.setLayout(layout)
+
+#         # create a tristate checkbox
+#         self.checkbox = QCheckBox('A Tristate Checkbox', self)
+#         # self.checkbox=QCheckBox('A Tristate Checkbox') ## this way does not establish the parent child relatioship
+#         self.checkbox.setTristate(True)
+# ## with the parent child relationship established. I do not need to add the widget but this hel[ed the positonin and ATTRIBUTES]
+#         layout.addWidget(self.checkbox, 0, 0, Qt.AlignmentFlag.AlignCenter)
+
+#         # show the window
+#         self.show()
+
+
+# if __name__ == '__main__':
+#     app = QApplication(sys.argv)
+#     window = MainWindow()
+#     sys.exit(app.exec())
+
+##### qlabel from python guis.com  signals and slots
+
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QCheckBox,  QGridLayout
-from PyQt5.QtCore import Qt
+from PyQt5 import QtWidgets as qtw
+from PyQt5 import QtCore as qtc
+from PyQt5 import QtGui as qtg
 
-
-class MainWindow(QWidget):
+class MainWindow(qtw.QWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.setWindowTitle('PyQt QCheckBox')
-        self.setGeometry(100, 100, 320, 210)
-
-        # create a grid layout
-        layout = QGridLayout()
+        self.setWindowTitle('PyQt QVBoxLayout')
+        self.setGeometry(10,10,400,600)
+        # create a layout
+        layout = qtw.QVBoxLayout()
         self.setLayout(layout)
 
-        # create a tristate checkbox
-        self.checkbox = QCheckBox('A Tristate Checkbox', self)
-        # self.checkbox=QCheckBox('A Tristate Checkbox') ## this way does not establish the parent child relatioship
-        self.checkbox.setTristate(True)
-## with the parent child relationship established. I do not need to add the widget but this hel[ed the positonin and ATTRIBUTES]
-        layout.addWidget(self.checkbox, 0, 0, Qt.AlignmentFlag.AlignCenter)
-
+        # create buttons
+        label_1 = qtw.QLabel()
+        # label_1.setStyleSheet('QLabel{background-color:red}')
+        label_1.setStyleSheet('background-color:red;')
+        label_2 = qtw.QLabel()
+        label_2.setStyleSheet('QLabel{background-color:green}')
+        label_3 = qtw.QLabel()
+        label_3.setStyleSheet('QLabel{background-color:blue}')
+        ## i am adding on another layout and will add QLabel
+        new_layout=qtw.QHBoxLayout()
+        # layout.addLayout(new_layout)
+        label_4 = qtw.QLabel('my label')
+        font = label_4.font()## three steps to set font size
+        font.setPointSize(50)
+        label_4.setFont(font)
+        label_4.setAlignment(qtc.Qt.AlignHCenter | qtc.Qt.AlignVCenter)
+        ## add QLabel widgets to layouts
+        layout.addWidget(label_1)
+        layout.addWidget(label_2)
+        layout.addWidget(label_3)
+        layout.addLayout(new_layout)## i had to put this here to get the new_layout at the bottom
+        new_layout.addWidget(label_4)
+        # label_4.setAlignment(qtc.Qt.AlignHCenter | qtc.Qt.AlignVCenter)
+        
+        pixmap = qtg.QPixmap('Codemy/rubberDuckey.png')
+        scaled_pixmap = pixmap.scaled(100, 100, qtc.Qt.KeepAspectRatio, qtc.Qt.SmoothTransformation)
+        label_4.setPixmap(scaled_pixmap)
+        # label_4.setScaledContents(True)
         # show the window
         self.show()
 
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
+    app = qtw.QApplication(sys.argv)
     window = MainWindow()
     sys.exit(app.exec())

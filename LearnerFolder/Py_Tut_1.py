@@ -27,7 +27,7 @@ class MainWindow(qtw.QWidget):
         h2_layout=qtw.QHBoxLayout()
         titles= ['Yes','No','Cancel']
         for title in titles:
-            buttons =[qtw.QPushButton(title) for title in titles]## this gives a list of qtw.QPushbutton('yes) etc
+            buttons =[qtw.QPushButton(title,self) for title in titles]## this gives a list of qtw.QPushbutton('yes) etc
             
         for button in buttons:
             button.setStyleSheet('background-color: green;')
