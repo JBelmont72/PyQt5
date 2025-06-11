@@ -10,6 +10,8 @@
         elif state == QtCore.Qt.Unchecked:
             print(f'{sender.text()} is Unchecked')
         self.checked()  # Update the label based on the current state of the checkboxes
+
+        # chat explanation: https://chatgpt.com/c/683f6685-7500-800f-9d41-d76f34d4c7fb of lambda function
 '''
 from PyQt5 import QtCore, QtGui, QtWidgets
 
