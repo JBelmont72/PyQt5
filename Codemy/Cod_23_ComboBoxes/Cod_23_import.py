@@ -74,14 +74,14 @@ class CustomMainWindow(qtw.QMainWindow):
         self.comboBox.currentIndexChanged.connect(lambda s: self.on_button_index_change(s))## this connects the currentIndexChanged signal of the comboBox to the on_button_click method
         # self.comboBox.currentIndexChanged.connect(self.on_button_index_change)## this connects the currentIndexChanged signal of the comboBox to the on_button_click method
         self.comboBox.activated.connect(lambda s: self.on_button_index_change(s))## this connects the activated signal of the comboBox to the on_button_click method
-        self.comboBox.activated.connect(self.clicker)## this connects the activated signal of the comboBox to the on_button_click method
+        # self.comboBox.activated.connect(self.clicker)## this connects the activated signal of the comboBox to the on_button_click method
         ## activated signal is emitted when the user selects an item from the combo box, this is used to update the label with the selected item from the combo box and No need to click the button to update the label with the selected item from the combo box!!!
         
         
     # def on_button_click(self):
     def on_button_click(self,s):
         selected_item = self.comboBox.currentText()
-        self.label.setText(f'Selected Item: {selected_item}')
+        self.label.setText(f'Selected Item from Button Click: {selected_item}')
         # Update the label with the selected item from the combo box
         print(f'Selected Item: {selected_item}')
         # Print the selected item to the console
@@ -96,7 +96,7 @@ class CustomMainWindow(qtw.QMainWindow):
         selected_item = self.comboBox.currentText()
         self.label.setText(f'Selected Item using comboBox: {selected_item}')
         # Update the label with the selected item from the combo box
-        print(f'Selected Item: {selected_item}')
+        print(f'Selected Item using comboBox: {selected_item}')
         # Print the selected item to the console
 
 

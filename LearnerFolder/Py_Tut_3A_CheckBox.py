@@ -84,55 +84,56 @@ Save or export settings
 
 '''
 
-# from PyQt5 import QtWidgets as qtw
-# from PyQt5 import QtCore as qtc
-# import sys
+from PyQt5 import QtWidgets as qtw
+from PyQt5 import QtCore as qtc
+import sys
 
-# class MainWindow(qtw.QWidget):
-#     def __init__(self):
-#         super().__init__()
-#         self.setWindowTitle('Multiple CheckBoxes with lambda')
-#         self.setGeometry(100, 100, 400, 300)
+class MainWindow(qtw.QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle('Multiple CheckBoxes with lambda')
+        self.setGeometry(100, 100, 400, 300)
 
-#         layout = qtw.QVBoxLayout()
-#         self.setLayout(layout)
+        layout = qtw.QVBoxLayout()
+        self.setLayout(layout)
 
-#         self.labels = []
-#         self.checkboxes = []
+        self.labels = []
+        self.checkboxes = []
 
-#         for i in range(3):
-#             label = qtw.QLabel(f'Label {i+1} — initial')
-#             checkbox = qtw.QCheckBox(f'CheckBox {i+1}', self)
-#             checkbox.setTristate()
-#             checkbox.setCheckState(qtc.Qt.Unchecked)
+        for i in range(3):
+            # label = qtw.QLabel(f'Label {i+1} — initial')
+            label = qtw.QLabel(f'Label {i+1} ')
+            checkbox = qtw.QCheckBox(f'CheckBox {i+1}', self)
+            checkbox.setTristate()
+            checkbox.setCheckState(qtc.Qt.Unchecked)
 
-#             layout.addWidget(checkbox)
-#             layout.addWidget(label)
+            layout.addWidget(checkbox)
+            layout.addWidget(label)
 
-#             self.checkboxes.append(checkbox)
-#             self.labels.append(label)
+            self.checkboxes.append(checkbox)
+            self.labels.append(label)
 
-#             # Use lambda to pass checkbox and label to the handler
-#             checkbox.stateChanged.connect(
-#                 lambda state, cb=checkbox, lbl=label: self.update_label(cb, lbl, state)
-#             )
+            # Use lambda to pass checkbox and label to the handler
+            checkbox.stateChanged.connect(
+                lambda state, cb=checkbox, lbl=label: self.update_label(cb, lbl, state)
+            )
 
-#         layout.addStretch()
+        layout.addStretch()
 
-#     def update_label(self, checkbox, label, state):
-#         if state == qtc.Qt.Checked:
-#             label.setText(f'{checkbox.text()} is Checked')
-#         elif state == qtc.Qt.Unchecked:
-#             label.setText(f'{checkbox.text()} is Unchecked')
-#         elif state == qtc.Qt.PartiallyChecked:
-#             label.setText(f'{checkbox.text()} is Partially Checked')
-#         print(f'{checkbox.text()} → state: {state}, isChecked(): {checkbox.isChecked()}')
+    def update_label(self, checkbox, label, state):
+        if state == qtc.Qt.Checked:
+            label.setText(f'{checkbox.text()} is Checked')
+        elif state == qtc.Qt.Unchecked:
+            label.setText(f'{checkbox.text()} is Unchecked')
+        elif state == qtc.Qt.PartiallyChecked:
+            label.setText(f'{checkbox.text()} is Partially Checked')
+        print(f'{checkbox.text()} → state: {state}, isChecked(): {checkbox.isChecked()}')
 
-# if __name__ == '__main__':
-#     app = qtw.QApplication(sys.argv)
-#     window = MainWindow()
-#     window.show()
-#     sys.exit(app.exec_())
+if __name__ == '__main__':
+    app = qtw.QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec_())
 ##Let’s say you're creating a form where the user can select multiple "skills" using checkboxes. Later, you want to submit or display which checkboxes were selected.
 
 ##Here’s how you'd use the list of checkboxes:
