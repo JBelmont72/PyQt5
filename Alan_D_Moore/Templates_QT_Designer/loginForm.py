@@ -78,7 +78,7 @@ class MainWindow(qtw.QWidget):
         
         ## can add layouts to layouts,  cannot widget to layouots.  layouts can be added to either a widget or layouot
         ## need to tell this class that this layout is for this class
-        self.setLayout(layout)
+        # self.setLayout(layout)
         ## want to start adding functioanality
         # cancel_button.clicked.connect(self.close)## close is the slot
         # cancel_button.pressxed.connect(self.close)## close is the slot

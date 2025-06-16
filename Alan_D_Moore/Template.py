@@ -59,6 +59,24 @@ if __name__ == '__main__':
 
 
 
+## for a .ui file, converted to a .py file, you can use the following command in the terminal:
+# pyuic5 -x your_file.ui -o your_file.py
+# # This command will generate a Python file (your_file.py) from the .ui file (your_file.ui).
+# # The -x option is used to include a main block in the generated Python file, which allows you to run the file directly.
+# # The -o option specifies the output file name.
+# # This is a template for a PyQt5 application with a main window and a label.
+# # then you can import the generated .py file into your main application file and use it as a class. ## open with :
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv) 
+    MainWindow = QtWidgets.QMainWindow()   ## or QWidget, or QMainWindow or QDialog depending on your needs 
+    ui = Ui_LoginForm()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
+
+
+
 
 # print(len(locals()))  # Print the number of local variables to check the environment, checks number of namepacesbeing used
 # ## can use aliases such as from Pyqt5 import QtWidgets as qtw, QtCore as qtc, QtGui as qtg
