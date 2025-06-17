@@ -114,9 +114,12 @@ from PyQt5 import QtCore as qtc
 from PyQt5 import QtGui as qtg
 from Connect1 import Ui_MainWindow as MainWindowUI  # This is the generated UI class from the first window
 from Connect2 import Ui_SecondWindow as SecondWindowUI  # This is the generated UI class from the second window
-
+## imported from: 
+# from PyQt5 import QtCore, QtGui, QtWidgets
+# class Ui_MainWindow(object):
+#     def setupUi(self, MainWindow):
 # Main application window (First Window)
-class MainWindow(qtw.QMainWindow, MainWindowUI):
+class MainWindow(qtw.QMainWindow, MainWindowUI):    #multiple inheritance
     def __init__(self):
         super().__init__()
         # self.ui = MainWindowUI()
@@ -140,7 +143,7 @@ class MainWindow(qtw.QMainWindow, MainWindowUI):
         self.lineEdit.setText(text)  # Update lineEdit in first window from second window
 
 
-# Second application window
+# Second application window this does not have the 'clearButton' as does the SecondWindow class below(but this does work as well)
 # class SecondWindow(qtw.QMainWindow, SecondWindowUI):
 #     # This class inherits from QMainWindow and the generated Ui_SecondWindow class.
 #     def __init__(self, main_window):
@@ -175,9 +178,27 @@ class SecondWindow(qtw.QMainWindow, SecondWindowUI):
     def send_text_back(self, text):
         self.main_window.update_label(text)
 
-    def clear_combo_box(self):
-        self.comboBox.clear()  # Clears all items
-        self.main_window.update_label("")  # Clear main window label too
+    # def clear_combo_box(self):
+    #     self.comboBox.clear()  # Clears all items
+    #     self.main_window.update_label("")  # Clear main window label too
+    def clear_combo_box(self):## this opens the COnfirmation_Box with functioality
+        confirm_dialog = ConfirmationBox(self)
+        result = confirm_dialog.exec_()
+
+        if result == qtw.QMessageBox.Yes:
+            self.comboBox.clear()
+            self.main_window.update_label("")
+#    def clear_combo_box(self):  ## this isbare bones to open the COnfirmationBox without functionality
+#         confirm_dialog=ConfirmationBox(self)
+#         confirm_dialog.exec_()
+         
+class ConfirmationBox(qtw.QMessageBox):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("Confirm Clear")
+        self.setText("Are you sure you want to clear the combo box?")
+        self.setStandardButtons(qtw.QMessageBox.Yes | qtw.QMessageBox.No)
+        self.setDefaultButton(qtw.QMessageBox.No)
 
 if __name__ == '__main__':
     app = qtw.QApplication(sys.argv)
@@ -185,3 +206,9 @@ if __name__ == '__main__':
     window.setWindowTitle('Main Window')
     window.show()
     sys.exit(app.exec_())
+    
+    
+    
+    
+    
+    
