@@ -124,7 +124,7 @@ class MainWindow(qtw.QMainWindow, MainWindowUI):    #multiple inheritance
         super().__init__()
         # self.ui = MainWindowUI()
         self.setupUi(self)  # Properly apply the generated UI to this QMainWindow instance
-
+        self.textEdit.setPlaceholderText("Enter your text here")
         # Connect button signals to their slots
         self.Open.clicked.connect(self.open_second_window)
         self.Submit.clicked.connect(self.submit_to_second_window)
@@ -159,6 +159,13 @@ class MainWindow(qtw.QMainWindow, MainWindowUI):    #multiple inheritance
 #     def send_text_back(self, text):
 #         # When combo box changes, update the main window's label or line edit
 #         self.main_window.update_label(text)
+
+## the Alternative to creating the 'SecondWindow' and passing multiple inheritance from QMainWindow and SecondWIndowUI is
+## to call the SecondWindow from a pushbutton etc in the MainWindow with a function like:
+## def open_window(self):
+##      self.window = QtWidgets.QMainwindow()
+##      self.ui =UiSecondWindow()
+##      self.window.show()
 class SecondWindow(qtw.QMainWindow, SecondWindowUI):
     def __init__(self, main_window):
         super().__init__()
@@ -188,6 +195,8 @@ class SecondWindow(qtw.QMainWindow, SecondWindowUI):
         if result == qtw.QMessageBox.Yes:
             self.comboBox.clear()
             self.main_window.update_label("")
+            # self.main_window.textEdit.setText('Enter your new text')
+            # self.main_window.textEdit.setText('Enter your new text')
 #    def clear_combo_box(self):  ## this isbare bones to open the COnfirmationBox without functionality
 #         confirm_dialog=ConfirmationBox(self)
 #         confirm_dialog.exec_()
