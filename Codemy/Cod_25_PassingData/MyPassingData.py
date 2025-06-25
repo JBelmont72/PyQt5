@@ -136,62 +136,62 @@ No Mechanism to Share Data:
 #     w.show()  ## show the window, this is where the window is shown
 #     sys.exit(app.exec_())   ## exit status tells if the program exited with or without mistakes
 
-import sys
-from PyQt5 import QtWidgets as qtw
-from PyQt5 import QtCore as qtc
-from PyQt5 import QtGui as qtg
-from Connect1 import Ui_MainWindow as MainWindowUI  # This is the generated UI class from the first window
-from Connect2 import Ui_SecondWindow as SecondWindowUI  # This is the generated UI class from the second window
+# import sys
+# from PyQt5 import QtWidgets as qtw
+# from PyQt5 import QtCore as qtc
+# from PyQt5 import QtGui as qtg
+# from Connect1 import Ui_MainWindow as MainWindowUI  # This is the generated UI class from the first window
+# from Connect2 import Ui_SecondWindow as SecondWindowUI  # This is the generated UI class from the second window
 
-# Main application window (First Window)
-class MainWindow(qtw.QMainWindow, MainWindowUI):
-    def __init__(self):
-        super().__init__()
-        # self.ui = MainWindowUI()
-        self.setupUi(self)  # Properly apply the generated UI to this QMainWindow instance
+# # Main application window (First Window)
+# class MainWindow(qtw.QMainWindow, MainWindowUI):
+#     def __init__(self):
+#         super().__init__()
+#         # self.ui = MainWindowUI()
+#         self.setupUi(self)  # Properly apply the generated UI to this QMainWindow instance
 
-        # Connect button signals to their slots
-        self.Open.clicked.connect(self.open_second_window)
-        self.Submit.clicked.connect(self.submit_to_second_window)
+#         # Connect button signals to their slots
+#         self.Open.clicked.connect(self.open_second_window)
+#         self.Submit.clicked.connect(self.submit_to_second_window)
 
-        # Create second window instance
-        self.second_window = SecondWindow(self)  # Pass reference to main window
+#         # Create second window instance
+#         self.second_window = SecondWindow(self)  # Pass reference to main window
 
-    def open_second_window(self):
-        self.second_window.show()
+#     def open_second_window(self):
+#         self.second_window.show()
 
-    def submit_to_second_window(self):
-        text = self.textEdit.toPlainText()
-        self.second_window.comboBox.addItem(text)  # Submit text to comboBox in second window
+#     def submit_to_second_window(self):
+#         text = self.textEdit.toPlainText()
+#         self.second_window.comboBox.addItem(text)  # Submit text to comboBox in second window
 
-    def update_label(self, text):
-        self.lineEdit.setText(text)  # Update lineEdit in first window from second window
-
-
-# Second application window
-class SecondWindow(qtw.QMainWindow, SecondWindowUI):
-    # This class inherits from QMainWindow and the generated Ui_SecondWindow class.
-    def __init__(self, main_window):
-        super().__init__()
-        # self.ui = SecondWindowUI()
-        self.setupUi(self)
-
-        self.main_window = main_window  # Store reference to main window
-
-        # Add a signal for text change in combo box to update the main window's label
-        self.comboBox.currentTextChanged.connect(self.send_text_back)
-
-    def send_text_back(self, text):
-        # When combo box changes, update the main window's label or line edit
-        self.main_window.update_label(text)
+#     def update_label(self, text):
+#         self.lineEdit.setText(text)  # Update lineEdit in first window from second window
 
 
-if __name__ == '__main__':
-    app = qtw.QApplication(sys.argv)
-    window = MainWindow()
-    window.setWindowTitle('Main Window')
-    window.show()
-    sys.exit(app.exec_())
+# # Second application window
+# class SecondWindow(qtw.QMainWindow, SecondWindowUI):
+#     # This class inherits from QMainWindow and the generated Ui_SecondWindow class.
+#     def __init__(self, main_window):
+#         super().__init__()
+#         # self.ui = SecondWindowUI()
+#         self.setupUi(self)
+
+#         self.main_window = main_window  # Store reference to main window
+
+#         # Add a signal for text change in combo box to update the main window's label
+#         self.comboBox.currentTextChanged.connect(self.send_text_back)
+
+#     def send_text_back(self, text):
+#         # When combo box changes, update the main window's label or line edit
+#         self.main_window.update_label(text)
+
+
+# if __name__ == '__main__':
+#     app = qtw.QApplication(sys.argv)
+#     window = MainWindow()
+#     window.setWindowTitle('Main Window')
+#     window.show()
+#     sys.exit(app.exec_())
 '''
 
 🔁 Where is main_window coming from?
@@ -226,3 +226,51 @@ This is a form of bidirectional communication, where each window can interact wi
 
 
 '''
+import sys
+from PyQt5 import QtWidgets as qtw
+from PyQt5 import QtCore as qtc
+from PyQt5 import QtGui as qtg
+from Connect1 import Ui_MainWindow as MainWindowUI  # This is the generated UI class from the first window
+from Connect2 import Ui_SecondWindow as SecondWindowUI  # This is the generated UI class from the second window
+
+class MainWindow(qtw.QMainWindow,MainWindowUI):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)## not MainWindowUI because I already included that in the multiple inheritance!!
+        
+        ## create a seoncd window instance
+        self.second_window= SecondWindow(self)
+        
+        # Connect button signals to their slots
+        self.Open.clicked.connect(self.open_second_window)
+        self.Submit.clicked.connect(self.submit_to_second_window)
+    def open_second_window(self):
+        self.second_window.show()
+
+    def submit_to_second_window(self):
+        text = self.textEdit.toPlainText()
+        self.second_window.comboBox.addItem(text)  # Submit text to comboBox in second window
+
+    def update_label(self, text):
+        self.lineEdit.setText(text)  # Update lineEdit in first window from second window
+
+
+class SecondWindow(qtw.QMainWindow,SecondWindowUI):
+    def __init__(self,main_window):
+        super().__init__()
+        self.setupUi(self)
+        self.main_window=main_window
+
+        # Add a signal for text change in combo box to update the main window's label
+        self.comboBox.currentTextChanged.connect(self.send_text_back)
+
+    def send_text_back(self, text):
+        # When combo box changes, update the main window's label or line edit
+        self.main_window.update_label(text)
+
+if __name__ == '__main__':
+    app = qtw.QApplication(sys.argv)
+    window = MainWindow()
+    window.setWindowTitle('Main Window')
+    window.show()
+    sys.exit(app.exec_())
