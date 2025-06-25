@@ -51,7 +51,7 @@ class MainWindow(qtw.QWidget):
         self.show()
     def autheniicate(self):
         print('login')
-        user = self.
+        user = self.user
         password =self.passEdit1.text()
         print(f'{user}')
 
