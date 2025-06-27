@@ -3,23 +3,23 @@ first is basic open the .ui
 second is to add functionality and pass data between comboboxes
 /Users/judsonbelmont/Documents/Shared_Folders/PyQt5/Codemy/Cod_28_DependentComboBoxes/dc.py
 '''
-from PyQt5.QtWidgets import QMainWindow,QApplication,QComboBox
-from PyQt5 import uic
-import sys
+# from PyQt5.QtWidgets import QMainWindow,QApplication,QComboBox
+# from PyQt5 import uic
+# import sys
 
-class MainWIndow(QMainWindow):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+# class MainWIndow(QMainWindow):
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
         
-        # Load the ui file
-        # uic.loadUi('dc.ui',self)
-        uic.loadUi('Codemy/Cod_28_DependentComboBoxes/dc.ui',self)
+#         # Load the ui file
+#         # uic.loadUi('dc.ui',self)
+#         uic.loadUi('Codemy/Cod_28_DependentComboBoxes/dc.ui',self)
         
-# Initialize the app
-app = QApplication(sys.argv)
-UIWindow = MainWIndow()
-UIWindow.show()
-app.exec_()
+# # Initialize the app
+# app = QApplication(sys.argv)
+# UIWindow = MainWIndow()
+# UIWindow.show()
+# app.exec_()
 
 from PyQt5.QtWidgets import QMainWindow,QApplication,QComboBox,QLabel
 from PyQt5 import uic
@@ -55,12 +55,12 @@ class MainWIndow(QMainWindow):
     #         self.comboBox_2.clear()
     #         self.comboBox_2.addItems(['Mary','Julia',"Jan",'Miriam'])
     def clicker(self,index):
-            self.comboBox_2.clear()
+            self.comboBox_2.clear() ## combBox adds theindexed data to combobox–3
             self.comboBox_2.addItems(self.comboBox.itemData(index))
             ## have comboBox2 selection show in label
             
     def clicker_2(self,index):
-        
+        print(index)
         self.label.clear()
         # self.label.setText(f'You Picked: {self.comboBox_2.currentText()}')## this also works
         self.label.setText(f'You Picked: {self.comboBox_2.currentText()} - {self.comboBox.currentText()}')## this also works
