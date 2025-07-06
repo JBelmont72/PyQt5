@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect><x>0</x><y>0</y><width>320</width><height>180</height></rect>
+  </property>
+  <property name="windowTitle">
+   <string>Main Window</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item><widget class="QPushButton" name="pushButton_second">
+      <property name="text"><string>Open Second Window</string></property>
+    </widget></item>
+    <item><widget class="QPushButton" name="pushButton_third">
+      <property name="text"><string>Open Third Window</string></property>
+    </widget></item>
+    <item><widget class="QPushButton" name="pushButton_list">
+      <property name="text"><string>List Third Windows</string></property>
+    </widget></item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

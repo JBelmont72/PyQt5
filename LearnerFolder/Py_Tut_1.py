@@ -1,6 +1,10 @@
 '''
 from python tutorial website as guide
 https://www.pythontutorial.net/pyqt/pyqt-signals-slots/#introduction-to-the-pyqt-signals-and-slots
+
+ helpful chatGPT (https://chatgpt.com/c/683919f8-421c-800f-9a22-199f50df24d8)
+- (https://www.pythontutorial.net/pyqt/pyqt-qcheckbox/)
+
 '''
 
 import sys

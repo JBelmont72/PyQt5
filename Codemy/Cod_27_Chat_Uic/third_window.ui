@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ThirdWindow</class>
+ <widget class="QMainWindow" name="ThirdWindow">
+  <property name="geometry">
+   <rect><x>0</x><y>0</y><width>240</width><height>120</height></rect>
+  </property>
+  <property name="windowTitle">
+   <string>Third Window</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item><widget class="QLabel" name="label">
+      <property name="text"><string>This is a Third Window</string></property>
+    </widget></item>
+    <item><widget class="QPushButton" name="myButton">
+      <property name="text"><string>Action Button</string></property>
+    </widget></item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
