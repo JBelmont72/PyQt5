@@ -1,7 +1,13 @@
+from collections import defaultdict
+
 '''pythonSimplified
 List Comprehension 
 chat:  https://chatgpt.com/c/68594067-58fc-800f-84a5-ba31d9847493
    /Documents/Shared_Folders/PyQt5/LearnerFolder/List_comprehension.py
+   list comprehension https://www.youtube.com/watch?v=Bw_4gcB6kg8  ryan and matt data sciences
+   dictionary comprehension. https://www.youtube.com/watch?v=wxd-rQkmq4Y. ryan and matt data sciences
+   
+merging lists of directories -future study https://www.reddit.com/r/learnpython/comments/15mufyp/merge_two_lists_each_list_contains_dictionaries/   
 '''
 
 fruits =['apples','bananas', 'strawberries']
@@ -159,3 +165,184 @@ print(dict_3)
 # ## i was not able to preserve 'Superman is a journalist'
 # myStrings2={(k if k != 'Superman' else k+ ' is not a journalist') for (k,v) in myDict.items()}       
 # print(myStrings2) #output. {1,3} I do not understand this output
+
+## Ryan and Matt Data Science. 'learn Python dictionary comprehension fast:  '
+### Syntax    dictionary ={key:expression for key,value in iterabel}
+# add 15 to each value in dict
+
+concerts ={
+    'Trivium':100,
+    'Nine Inch Nails': 90,
+    'Queens of the Stone Age':110
+}
+## add 15
+# new_concerts ={key:value+15 for (key,value) in concerts.items()if key !='Trivium'}
+# print(new_concerts)
+# new_concerts ={key if key != 'Trivium' else 'AC-DC': value +15 for (key,value) in concerts.items()}
+# print(new_concerts)
+
+## if statement based on how loud the concert is
+loud_concert ={key:value for (key,value) in concerts.items() if value >=100}
+print(loud_concert)
+## create dict from a list
+songs=['innagadavidda','Eli\'s Comming','Mony Mony','Grazin in the Grass']
+song_length=[12,5,3,2]
+
+song_len={key:len(key) for key in songs}
+print(song_len)
+## TO ZIP TW LISTS TOGETHER IN A NEW DICT
+song_dict= dict(zip(songs,song_length))
+
+print(song_dict)
+
+
+
+
+
+fruits =['apples','bananas', 'strawberries','Kiwi','apricots']
+bits = [0,1,1,1,0,0,0,1,1,1]
+new_fruits=dict(zip(fruits,bits))
+print(new_fruits)
+my_fruits ={'apples': ['red','big'], 'bananas': 'yellow', 'strawberries': 'red', 'Kiwi': 'lime', 'apricots': 'orange'}
+concerts ={
+    'Trivium':100,
+    'Nine Inch Nails': 90,
+    'Queens of the Stone Age':110
+}
+## merging dictionaries 
+# myDict3={key:(my_fruits[key],new_fruits[key]) for (key) in new_fruits if key in my_fruits}
+# myDict3={key:(my_fruits[key],new_fruits[key]) for (key) in my_fruits if key in new_fruits}
+myDict3={key:(my_fruits[key],new_fruits[key]) for (key) in my_fruits.keys()if key in new_fruits.keys()}
+print(myDict3) ## this does not combince 
+
+
+# dict_3 = {
+#     key: (dict_2[key], dict_1[key])
+#     for (key)in dict_1 if key in dict_2
+# }
+
+# print(dict_3)
+
+
+# https://favtutor.com/blogs/merge-dictionaries-python
+dict1 = {"a": 1, "b": [4,3]}
+dict2 = {"c": 3, "d": 4, 'b': 12}
+
+# Combine values for duplicate keys into a list THIS IS AWESOME, uses the defaultdict(list)
+# /Shared_Folders/PyQt5/LearnerFolder/List_comprehension.py
+dict1 = {"a": 1, "b": [4,3]}
+dict2 = {"c": 3, "d": 4, 'b': 12}
+dict3 = defaultdict(list)
+for d in (dict1, dict2):
+    for k, v in d.items():
+        dict3[k].append(v)
+print(dict(dict3))
+
+merged_dict = dict1.copy()
+for key, value in dict2.items():
+    if key in merged_dict:
+        # If the value is not already a list, make it a list
+        if not isinstance(merged_dict[key], list):
+            merged_dict[key] = [merged_dict[key]]
+        # If the new value is a list, extend; else, append
+        if isinstance(value, list):
+            merged_dict[key].extend(value)
+        else:
+            merged_dict[key].append(value)
+    else:
+        # If value is a list, assign as is; else, wrap in a list
+        merged_dict[key] = value if isinstance(value, list) else value ## i controlled this by not using [value] which would have made singel values into lists of one element
+print(merged_dict)  # output: {'a': [1], 'b': [4, 3, 12], 'c': [3], 'd': [4]}
+
+dict_1={'John': 15, 'Rick': 10, 'Misa': 12}
+dict_2={'Bonnie': 18, 'Rick': 20, 'Matt': 16}
+dict_3={k:v for d in (dict_1,dict_2) for k,v in d.items()}
+print (dict_3)
+
+
+
+
+# https://www.google.com/search?client=safari&rls=en&q=explain+syntax+of++++++++if+not+isinstance(merged_dict%5Bkey%5D%2C+list)%3A+++++++++++++merged_dict%5Bkey%5D+%3D+%5Bmerged_dict%5Bkey%5D%5D&ie=UTF-8&oe=UTF-8
+
+merged_dict = {'a': 1, 'b': [2, 3]}
+print(merged_dict['a'])
+print(type(merged_dict['a']))
+# Check if the value for key 'a' is a list
+if not isinstance(merged_dict['a'], list):
+    # If not a list, make it a list
+    merged_dict['a'] = [merged_dict['a']]
+
+print(merged_dict)
+# Output: {'a': [1], 'b': [2, 3]}
+print(merged_dict['a'])
+print(type(merged_dict['a']))
+
+
+# AI explained :         # If the value is not already a list, make it a list
+#         if not isinstance(merged_dict[key], list):
+#             merged_dict[key] = [merged_dict[key]]
+            
+# The syntax if not isinstance(merged_dict[key], list): merged_dict[key] = [merged_dict[key]] in Python is used to ensure that the value associated with a specific key in a dictionary is always a list. 
+# Here's a breakdown:
+# if not isinstance(...): This part checks if a condition is false.
+# isinstance(merged_dict[key], list): This checks if the value associated with the key in the merged_dict is an instance of the list data type. The isinstance() function takes two arguments: the object to check and the class or type to check against.
+# merged_dict[key] = [merged_dict[key]]: If the isinstance check returns False (meaning the value is not already a list), this part of the code converts the existing value into a single-element list containing that value. 
+# In essence, the code ensures that if merged_dict[key] is not a list, it becomes a list containing the original value. 
+# Example:
+# python
+# merged_dict = {'a': 1, 'b': [2, 3]}
+
+# # Check if the value for key 'a' is a list
+# if not isinstance(merged_dict['a'], list):
+#     # If not a list, make it a list
+#     merged_dict['a'] = [merged_dict['a']]
+
+# print(merged_dict)
+# # Output: {'a': [1], 'b': [2, 3]}
+# In this example, the value associated with 'a' was initially 1 (an integer), not a list. The if statement evaluated to True because isinstance(1, list) is False. The Python documentation says that if the condition is true, the code block following the if statement is executed. Thus, the value for 'a' was converted to [1]. The value for 'b' was already a list, so that part of the code was skipped
+
+
+
+
+## LIST COMPREHENSIONS Ryan and Matt Data Sciences
+#Obsidian 2024/List Comprehension
+teams = ['Rays', 'Yankees', 'Red Sox', 'Blue Jays', 'Orioles']
+upper_case_teams=[x.upper() for x in teams] 
+print(upper_case_teams)
+team_length=[len(x) for x in teams]
+print(team_length)
+# Example 7
+bands = ['Metallica', 'NIN', 'A Perfect Circle', 'Northlane']
+## substitute Nine in Nails for NIN
+new_bands=[band if band != 'NIN' else 'Nine in Nails' for band in bands]
+print(new_bands)
+#Example 9 search fo char
+# myString ='"We're off to never-never land"'
+myVowels =[(char.count('e'),char)  for char in "We're off to never-never land" if char in 'aeiou' ]
+print(myVowels)
+myVowels =[char  for char in "We're off to never-never land" if char in 'aeiou' ]
+print(myVowels)
+# Example 10 using multiple if conditions
+numbers = [2, 5, 8, 9, 12, 15, 18, 20, 24]
+myNum= [num  for num in numbers if num <=10 if num/3==3 ]
+print(myNum)
+#Example 11 Range 
+numbers_squared =[num **2 for num  in range(10)]
+print(numbers_squared)
+# Example 12 - Function with list comprehension
+number_list = [10, 20, 30]
+# Let’s create a function plusfive which adds 5 to a number
+def plus_five(num):
+    return num+5
+number_plus_5_v2 = [plus_five(x) for x in number_list] 
+print(number_plus_5_v2)
+
+num= plus_five(5)
+print(num)
+#Example Nested list comprehension
+matrix = [[j for j in range(3)] for i in range(5)] 
+print(matrix)
+## note difference,  need the list square brackets in order to establish the col and then make 5  rows
+
+matrix =[col for col in range(3) for row in range(5) ]
+print(matrix)
